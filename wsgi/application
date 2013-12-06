@@ -37,7 +37,7 @@ def application(environ, start_response):
         d = parse_qs(request_body)
         tweetText = d.get('tweetText', [''])[0]
         ctype = 'application/json; charset=utf-8'
-        response_body = "".join(["{\"sentiment\":", "\"", random.choice(["positive", "negative"]),"\"","}", "{\"tweetText\":\"", tweetText, "\"}"])
+        response_body = "".join(["{\"sentiment\":", "\"", random.choice(["positive", "negative"]),"\"", ",", "\"tweetText\":\"", tweetText, "\"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>
