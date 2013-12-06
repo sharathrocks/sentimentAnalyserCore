@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import random
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
@@ -21,6 +22,9 @@ def application(environ, start_response):
         response_body = ['%s: %s' % (key, value)
                     for key, value in sorted(environ.items())]
         response_body = '\n'.join(response_body)
+    elif environ['PATH_INFO'] == '/analyse_sentiment':
+        ctype = 'application/json; charset=utf-8'
+        response_body = "".join(["{sentiment:",random.choice(["positive", "negative"]),"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>
@@ -181,7 +185,7 @@ def application(environ, start_response):
 </html>'''
 
     status = '200 OK'
-    response_headers = [('Content-Type', ctype), ('Content-Length', str(len(response_body)))]
+    response_headers = [('Content-Type', ctype), ('Content-Length', str(len(response_body))), ('Access-Control-Allow-Origin', '*')]
     #
     start_response(status, response_headers)
     return [response_body]
