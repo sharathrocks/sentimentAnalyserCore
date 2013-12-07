@@ -2,6 +2,8 @@
 import os
 import random
 from cgi import parse_qs, escape
+from flask import Flask , jsonify, render_template
+from textblob import TextBlob
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
@@ -36,8 +38,9 @@ def application(environ, start_response):
         request_body = environ['wsgi.input'].read(request_body_size)
         d = parse_qs(request_body)
         tweetText = d.get('tweetText', [''])[0]
+		textBlobText = TextBlob(tweetText)
         ctype = 'application/json; charset=utf-8'
-        response_body = "".join(["{\"sentiment\":", "\"", random.choice(["positive", "negative"]),"\"", ",", "\"tweetText\":\"", tweetText, "\"}"])
+        response_body = "".join(["{\"sentiment\":", "\"", random.choice(["positive", "negative"]),"\"", ",", "\"tweetText\":\"", textBlobText.polarity, "\"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>
