@@ -40,7 +40,7 @@ def application(environ, start_response):
         tweetText = d.get('tweetText', [''])[0]
 		textBlobText = TextBlob(tweetText)
         ctype = 'application/json; charset=utf-8'
-        response_body = "".join(["{\"sentiment\":", "\"", random.choice(["positive", "negative"]),"\"", ",", "\"tweetText\":\"", textBlobText.polarity, "\"}"])
+        response_body = "".join(["{\"sentiment\":", "\"", random.choice(["positive", "negative"]),"\"", ",", "\"tweetText\":\"", textBlobText, "\"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>
