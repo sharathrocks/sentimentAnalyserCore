@@ -45,7 +45,7 @@ def application(environ, start_response):
             textBlobText = "error"
         
         ctype = 'application/json; charset=utf-8'
-        response_body = "".join(["{\"sentiment\":", "\"", str(textBlobText.polarity),"\"", ",", "\"tweetText\":\"", tweetText, "\"}"])
+        response_body = "".join(["{\"sentiment\":", "\"", str(textBlobText.polarity),"\"", ",", "\"tweetText\":\"", tweetText,"\"", ",", "\"hashId\":\"", str(inputHashId), "\"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>
