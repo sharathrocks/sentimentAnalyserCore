@@ -28,7 +28,7 @@ def get_word_features(wordlist):
 
 def read_tweets(fname, t_type):
     tweets = []
-    f = open(fname, 'r')
+    f = open(os.path.join(os.path.dirname(__file__),fname), 'r')
     line = f.readline()
     while line != '':
         tweets.append([line, t_type])
