@@ -64,6 +64,7 @@ def classify2(text):
     neg_prob = sum(log((neg[word] + 1) / (2 * totals[1])) for word in words)
     return (pos_prob > neg_prob, abs(pos_prob - neg_prob))
 
+
 def classify_demo(text):
     words = set(word for word in negate_sequence(text) if word in pos or word in neg)
     if (len(words) == 0): 
