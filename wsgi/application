@@ -18,7 +18,6 @@ except IOError:
 # IMPORTANT: Put any additional includes below this line.  If placed above this
 # line, it's possible required libraries won't be in your searchable path
 # 
-info.setup()
 
 def application(environ, start_response):
 
@@ -35,7 +34,7 @@ def application(environ, start_response):
             request_body_size = int(environ.get('CONTENT_LENGTH', 0))
         except (ValueError):
             request_body_size = 0
-
+        info.setup()
         # When the method is POST the query string will be sent
         # in the HTTP request body which is passed by the WSGI server
         # in the file like wsgi.input environment variable.
