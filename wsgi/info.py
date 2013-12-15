@@ -4,7 +4,7 @@ from operator import mul
 from collections import Counter
 import os
 import pickle
-
+from math import e
 class MyDict(dict):
     def __getitem__(self, key):
         if key in self:
@@ -97,6 +97,17 @@ def feature_selection_trials():
         
         return
 
+def percentage_confidence(conf):
+    return 100.0 * e ** conf / (1 + e**conf)
+
+def get_sentiment_info(text):
+    flag, confidence = classify2(text)
+    if confidence > 0.5:
+        sentiment = "positive" if flag else "negative"
+    else:
+        sentiment = "neutral"
+    conf = "%.4f" % percentage_confidence(confidence) 
+    return (sentiment, conf)
 
 if __name__ == '__main__':
     feature_selection_trials()

@@ -6,8 +6,6 @@ from flask import Flask , jsonify, render_template
 from textblob import TextBlob
 import classification
 import info
-from math import e
-from info import MyDict, classify2
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
@@ -20,17 +18,6 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 # 
 info.setup()
-def percentage_confidence(conf):
-    return 100.0 * e ** conf / (1 + e**conf)
-
-def get_sentiment_info(text):
-    flag, confidence = classify2(text)
-    if confidence > 0.5:
-        sentiment = "Positive" if flag else "Negative"
-    else:
-        sentiment = "Neutral"
-    conf = "%.4f" % percentage_confidence(confidence) 
-    return (sentiment, conf)
 
 def application(environ, start_response):
 
@@ -56,15 +43,15 @@ def application(environ, start_response):
         tweetText = d.get('tweetText', [''])[0]
         inputHashId = d.get('hashId', [''])[0]
         
-        larunceSentiment = classification.classify_tweet(tweetText)
-        #result, confidence = get_sentiment_info(tweetText)
+        #larunceSentiment = classification.classify_tweet(tweetText)
+        result, confidence = info.get_sentiment_info(tweetText)
         try:
             textBlobText = TextBlob(tweetText)
         except (valerror):
             textBlobText = "error"
         
         ctype = 'application/json; charset=utf-8'
-        response_body = "".join(["{\"sentiment\":", "\"", larunceSentiment,"\"", ",", "\"tweetText\":\"", tweetText,"\"", ",", "\"hashId\":\"", str(inputHashId), "\"}"])
+        response_body = "".join(["{\"sentiment\":", "\"", result,"\"", ",", "\"tweetText\":\"", tweetText,"\"", ",", "\"hashId\":\"", str(inputHashId), "\"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>
