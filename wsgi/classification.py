@@ -10,6 +10,7 @@ and 10 negative tweets respectively to test the
 classifier.
 '''
 import nltk
+import os
 from nltk.classify.naivebayes import NaiveBayesClassifier
 
 
