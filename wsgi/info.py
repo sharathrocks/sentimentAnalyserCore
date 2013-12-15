@@ -93,8 +93,10 @@ def feature_selection_trials():
         try:
             with open(os.path.join(os.path.dirname(__file__),FDATA_FILE), "rb") as ff:
                 pos, neg, totals = pickle.load(ff)
-        except Exception:
-            logging.error(" ### Exception "+str(Exception))
+        except Exception as ex:
+            template = "An exception of type {0} occured. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            logging.error(" ### Exception "+message)
         
         return
 
