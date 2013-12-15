@@ -56,15 +56,15 @@ def application(environ, start_response):
         tweetText = d.get('tweetText', [''])[0]
         inputHashId = d.get('hashId', [''])[0]
         
-        #larunceSentiment = classification.classify_tweet(tweetText)
-        result, confidence = get_sentiment_info(tweetText)
+        larunceSentiment = classification.classify_tweet(tweetText)
+        #result, confidence = get_sentiment_info(tweetText)
         try:
             textBlobText = TextBlob(tweetText)
         except (valerror):
             textBlobText = "error"
         
         ctype = 'application/json; charset=utf-8'
-        response_body = "".join(["{\"sentiment\":", "\"", result,"\"", ",", "\"tweetText\":\"", tweetText,"\"", ",", "\"hashId\":\"", str(inputHashId), "\"}"])
+        response_body = "".join(["{\"sentiment\":", "\"", larunceSentiment,"\"", ",", "\"tweetText\":\"", tweetText,"\"", ",", "\"hashId\":\"", str(inputHashId), "\"}"])
     else:
         ctype = 'text/html'
         response_body = '''<!doctype html>

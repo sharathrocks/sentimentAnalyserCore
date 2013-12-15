@@ -10,6 +10,7 @@ and 10 negative tweets respectively to test the
 classifier.
 '''
 import nltk
+import pickle
 import os
 from nltk.classify.naivebayes import NaiveBayesClassifier
 
@@ -50,6 +51,17 @@ def classify_tweet(tweet):
     return classifier.classify(extract_features(nltk.word_tokenize(tweet)))
 
 
+def pickleObjectToFile(obj, fileName):
+    pickledClassifierFile = open(fileName,'wb')
+    pickle.dump(obj, pickledClassifierFile)
+    pickledClassifierFile.close()
+
+def readPickledObjFromFile(fileName):
+    f = open(os.path.join(os.path.dirname(__file__),fileName))
+    obj = pickle.load(f)
+    f.close()
+    return obj
+
 # read in postive and negative training tweets
 pos_tweets = read_tweets('happy.txt', 'positive')
 neg_tweets = read_tweets('sad.txt', 'negative')
@@ -68,7 +80,8 @@ word_features = get_word_features(\
 
 # get the training set and train the Naive Bayes Classifier
 training_set = nltk.classify.util.apply_features(extract_features, tweets)
-classifier = NaiveBayesClassifier.train(training_set)
+#classifier = NaiveBayesClassifier.train(training_set)
+classifier = readPickledObjFromFile('nbPickle.pickle')
 
 
 # read in the test tweets and check accuracy
