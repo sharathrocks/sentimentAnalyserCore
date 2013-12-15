@@ -87,8 +87,8 @@ def feature_selection_trials():
     global pos, neg, totals, features
     retrain = False
 
-    if not retrain and os.path.isfile(FDATA_FILE):
-        pos, neg, totals = pickle.load(open(FDATA_FILE))
+    if not retrain and os.path.isfile(os.path.join(os.path.dirname(__file__),FDATA_FILE)):
+        pos, neg, totals = pickle.load(open(os.path.join(os.path.dirname(__file__),FDATA_FILE)))
         return
 
 
