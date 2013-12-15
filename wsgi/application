@@ -6,6 +6,7 @@ from flask import Flask , jsonify, render_template
 from textblob import TextBlob
 import classification
 import info
+import MyDict from info
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
