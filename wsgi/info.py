@@ -1,5 +1,5 @@
 from __future__ import division
-from math import log, exp
+from math import log, exp, e
 from operator import mul
 from collections import Counter
 import os
