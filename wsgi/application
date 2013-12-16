@@ -5,9 +5,9 @@ from cgi import parse_qs, escape
 from flask import Flask , jsonify, render_template
 from textblob import TextBlob
 import classification
-import info
 from math import e
 from info import MyDict, classify2
+import info
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
