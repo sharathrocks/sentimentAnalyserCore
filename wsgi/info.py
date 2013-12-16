@@ -12,8 +12,8 @@ class MyDict(dict):
             return self.get(key)
         return 0
 
-pos = MyDict()
-neg = MyDict()
+pos = {}
+neg = {}
 features = set()
 totals = [0, 0]
 delchars = ''.join(c for c in map(chr, range(128)) if not c.isalnum())
