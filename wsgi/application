@@ -6,7 +6,7 @@ from flask import Flask , jsonify, render_template
 from textblob import TextBlob
 import classification
 from math import e
-from info import MyDict, classify2
+#from info import MyDict, classify2
 import info
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
@@ -24,7 +24,7 @@ def percentage_confidence(conf):
     return 100.0 * e ** conf / (1 + e**conf)
 
 def get_sentiment_info(text):
-    flag, confidence = classify2(text)
+    flag, confidence = info.classify2(text)
     if confidence > 0.5:
         sentiment = "Positive" if flag else "Negative"
     else:
