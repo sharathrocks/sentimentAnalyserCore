@@ -117,3 +117,4 @@ if __name__ == '__main__':
 
 def setup():
     feature_selection_trials()
+setup()
