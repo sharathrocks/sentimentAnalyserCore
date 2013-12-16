@@ -90,14 +90,8 @@ def feature_selection_trials():
     retrain = False
 
     if not retrain and os.path.isfile(os.path.join(os.path.dirname(__file__),FDATA_FILE)):
-        try:
-            with open(os.path.join(os.path.dirname(__file__),FDATA_FILE), "rb") as ff:
-                pos, neg, totals = pickle.load(ff)
-        except Exception as ex:
-            template = "An exception of type {0} occured. Arguments:\n{1!r}"
-            message = template.format(type(ex).__name__, ex.args)
-            logging.error(" ### Exception "+message)
-        
+        with open(os.path.join(os.path.dirname(__file__),FDATA_FILE), "rb") as ff:
+            pos, neg, totals = pickle.load(ff)
         return
 
 def percentage_confidence(conf):
