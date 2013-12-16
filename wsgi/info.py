@@ -6,14 +6,14 @@ import os
 import pickle
 import logging
 
-#class MyDict(dict):
-#    def __getitem__(self, key):
-#        if key in self:
-#            return self.get(key)
-#        return 0
+class MyDict(dict):
+    def __getitem__(self, key):
+        if key in self:
+            return self.get(key)
+        return 0
 
-pos = {}
-neg = {}
+pos = MyDict()
+neg = MyDict()
 features = set()
 totals = [0, 0]
 delchars = ''.join(c for c in map(chr, range(128)) if not c.isalnum())
@@ -90,8 +90,7 @@ def feature_selection_trials():
     retrain = False
 
     if not retrain and os.path.isfile(os.path.join(os.path.dirname(__file__),FDATA_FILE)):
-        with open(os.path.join(os.path.dirname(__file__),FDATA_FILE), "rb") as ff:
-            pos, neg, totals = pickle.load(ff)
+        pos, neg, totals = pickle.load(open(os.path.join(os.path.dirname(__file__),FDATA_FILE), "rb"))
         return
 
 def percentage_confidence(conf):
@@ -111,4 +110,3 @@ if __name__ == '__main__':
 
 def setup():
     feature_selection_trials()
-setup()
