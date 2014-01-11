@@ -11,6 +11,11 @@ from info import MyDict
 from math import e
 
 
+class MyDict(dict):
+    def __getitem__(self, key):
+        if key in self:
+            return self.get(key)
+        return 0
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
