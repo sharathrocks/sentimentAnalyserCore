@@ -91,7 +91,6 @@ def feature_selection_trials():
     """
     global pos, neg, totals, features
     retrain = False
-    logging.error(str(type(pos)))
     if not retrain and os.path.isfile(os.path.join(os.path.dirname(__file__),FDATA_FILE)):
         pos, neg, totals = pickle.load(open(os.path.join(os.path.dirname(__file__),FDATA_FILE), "rb"))
         return

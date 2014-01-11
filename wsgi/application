@@ -26,9 +26,9 @@ def percentage_confidence(conf):
 def get_sentiment_info(text):
     flag, confidence = info.classify2(text)
     if confidence > 0.5:
-        sentiment = "Positive" if flag else "Negative"
+        sentiment = "positive" if flag else "negative"
     else:
-        sentiment = "Neutral"
+        sentiment = "neutral"
     conf = "%.4f" % percentage_confidence(confidence) 
     return (sentiment, conf)
     
