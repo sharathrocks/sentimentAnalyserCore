@@ -3,14 +3,9 @@ from math import log, exp, e
 from operator import mul
 from collections import Counter
 import os
+from myDict import MyDict
 import pickle
 import logging
-
-class MyDict(dict):
-    def __getitem__(self, key):
-        if key in self:
-            return self.get(key)
-        return 0
 
 pos = MyDict()
 neg = MyDict()
