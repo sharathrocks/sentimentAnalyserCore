@@ -7,7 +7,6 @@ from textblob import TextBlob
 import classification
 import info
 from info import classify2
-from info import MyDict
 from math import e
 
 
