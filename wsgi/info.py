@@ -6,14 +6,6 @@ import os
 import pickle
 import logging
 
-class MyDict(dict):
-    def __getitem__(self, key):
-        if key in self:
-            return self.get(key)
-        return 0
-
-#pos = MyDict()
-#neg = MyDict()
 pos = {}
 neg = {}
 features = set()
@@ -64,10 +56,16 @@ def classify2(text):
     words = set(word for word in negate_sequence(text) if word in pos or word in neg)
     if (len(words) == 0): return True, 0
     # Probability that word occurs in pos documents
-    pos_prob = sum(log((pos[word] + 1) / (2 * totals[0])) for word in words)
-    neg_prob = sum(log((neg[word] + 1) / (2 * totals[1])) for word in words)
+    pos_prob = sum(log((get_value_from_dict(pos, word) + 1) / (2 * totals[0])) for word in words)
+    neg_prob = sum(log((get_value_from_dict(neg, word) + 1) / (2 * totals[1])) for word in words)
     return (pos_prob > neg_prob, abs(pos_prob - neg_prob))
 
+def get_value_from_dict(dictionary, key):
+    if key in dictionary:
+        value = dictionary[key]
+    else:
+        value = 0
+    return value
 
 def classify_demo(text):
     words = set(word for word in negate_sequence(text) if word in pos or word in neg)
